@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class death : MonoBehaviour
 {
-    // Start is called before the first frame update
+    PlayerHealth ph;
     void Start()
     {
-        
+        ph = GetComponent<PlayerHealth>();
     }
 
-    // Update is called once per frame
-    void Update()
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("enemy"))
+        {
+
+            TakeDamage(100);
+        }
     }
-}
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        healthBar.SetHealth(currentHealth);
+
+        if (currentHealth == 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }*/
+}  

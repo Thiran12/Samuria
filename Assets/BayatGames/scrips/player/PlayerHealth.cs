@@ -22,6 +22,12 @@ public class PlayerHealth : MonoBehaviour
         if (collision.gameObject.CompareTag("enemy"))
         {
 
+            TakeDamage(20);
+        }
+
+        if (collision.gameObject.CompareTag("void"))
+        {
+
             TakeDamage(100);
         }
 
@@ -33,7 +39,7 @@ public class PlayerHealth : MonoBehaviour
 
         healthBar.SetHealth(currentHealth);
 
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
