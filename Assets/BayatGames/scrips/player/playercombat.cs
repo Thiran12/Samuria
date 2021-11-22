@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class playercombat : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Animator animator;
+    void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             Attack();
         }
     }
     void Attack()
     {
-
+        animator.SetTrigger("Attack");
     }
 }
-  
