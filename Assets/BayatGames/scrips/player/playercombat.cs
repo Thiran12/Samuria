@@ -6,14 +6,19 @@ public class playercombat : MonoBehaviour
 {
     public Animator animator;
     public Transform attackPoint;
-    public float attackrange = 0.5f;
-    public int attackDamage = 40;
+    public float attackrange = 0.6f;
+    public int attackDamage = 50;
     public LayerMask enemyLayers;
+    SpriteRenderer sprite;
 
+    private void Start()
+    {
+        sprite = GetComponent<SpriteRenderer>();
+    }
 
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Attack();
         }
@@ -24,9 +29,20 @@ public class playercombat : MonoBehaviour
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackrange, enemyLayers);
 
-        foreach(Collider2D enemy in hitEnemies)
+        foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+
+            //flipX == true means facing left
+            //flipX == false means facing right
+            
+            if (sprite.flipX && enemy.transform.position.x<transform.position.x)
+            {
+                enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            }
+            else if (!sprite.flipX && enemy.transform.position.x > transform.position.x)
+            {
+                enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            }
         }
     }
 
@@ -35,5 +51,6 @@ public class playercombat : MonoBehaviour
         if (attackPoint == null)
             return;
         Gizmos.DrawWireSphere(attackPoint.position, attackrange);
+
     }
 }

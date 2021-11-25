@@ -9,6 +9,7 @@ public class move : MonoBehaviour
     private float dirX = 0f;
     [SerializeField] private float playerMoveSpeed = 5f;
     [SerializeField] private float playerJumpHeight = 15f;
+    [SerializeField] public GameObject AttackPoint;
     private void Start ()
     {
         rb2 = GetComponent<Rigidbody2D>();
@@ -32,6 +33,8 @@ public class move : MonoBehaviour
         else if (dirX <0)
         {
             sprite.flipX = true;
+                
+            
         }
     }
 }
