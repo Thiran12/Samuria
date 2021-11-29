@@ -31,18 +31,7 @@ public class playercombat : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-
-            //flipX == true means facing left
-            //flipX == false means facing right
-            
-            if (sprite.flipX && enemy.transform.position.x<transform.position.x)
-            {
-                enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
-            }
-            else if (!sprite.flipX && enemy.transform.position.x > transform.position.x)
-            {
-                enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
-            }
+            enemy.GetComponent<Enemy>().TakeDamage(attackDamage); 
         }
     }
 

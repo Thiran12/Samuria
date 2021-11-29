@@ -27,14 +27,14 @@ public class move : MonoBehaviour
         }
         if (dirX > 0f)
         {
-            sprite.flipX = false;
+            transform.eulerAngles = new Vector3(0, 0, 0);
 
         }
         else if (dirX <0)
         {
-            sprite.flipX = true;
-                
-            
+            transform.eulerAngles = new Vector3(0, 180, 0);
+
+
         }
     }
 }
