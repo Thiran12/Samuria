@@ -15,8 +15,8 @@ public class patrol : MonoBehaviour
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
 
-
-        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance);
+        LayerMask mask = LayerMask.GetMask("objects");
+        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance, mask);
         if (groundInfo.collider == false)
         {
             if (movingRight == true)
