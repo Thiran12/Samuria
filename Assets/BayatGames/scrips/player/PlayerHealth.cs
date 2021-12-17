@@ -7,6 +7,9 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public GameObject player;
+    float shootInterval = 3f;
+    float shootTime;
+    Enemy enemyinrange;
 
     public healthbar healthBar;
 
@@ -17,18 +20,14 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnUpdate()
     {
-        if (collision.gameObject.CompareTag("enemy"))
+        shootTime += Time.deltaTime;
+        if (enemyinrange != null && shootTime > shootInterval)
         {
+            shootTime = 0f;
+            TakeDamage(enemyinrange.Damage);
 
-            TakeDamage(20);
-        }
-
-        if (collision.gameObject.CompareTag("void"))
-        {
-
-            TakeDamage(100);
         }
 
     }
@@ -42,6 +41,37 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    private void OnCollisonEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("enemy"))
+        {
+            var enemy = collision.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemyinrange = enemy;
+            }
+           
+        }
+        if (collision.gameObject.CompareTag("void"))
+        {
+
+            TakeDamage(100);
+        }
+    }
+
+    private void OnCollisonExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("enemy"))
+        {
+            var enemy = collision.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemyinrange = null;
+            }
+
         }
     }
 }   

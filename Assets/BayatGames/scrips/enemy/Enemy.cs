@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
     public int maxHealth = 100;
     int currentHealth;
+    public bool IsEndBoss = false;
+    public int Damage = 20;
+    public string NextLevel = "";
     void Start()
     {
         currentHealth = maxHealth;
@@ -26,5 +30,12 @@ public class Enemy : MonoBehaviour
 
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
+        if (IsEndBoss)
+        {
+            // this is where the game ends
+            SceneManager.LoadScene(NextLevel);
+        }
     }
+    
+
 }

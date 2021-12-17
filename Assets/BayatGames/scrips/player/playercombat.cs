@@ -33,7 +33,12 @@ public class playercombat : MonoBehaviour
         {
             if(enemy != null)
             {
-              enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+                var enemycomp = enemy.GetComponent<Enemy>();
+                if (enemycomp != null)
+                {
+                    enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+                }
+              
             }
             
         }
