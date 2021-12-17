@@ -7,8 +7,8 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public GameObject player;
-    float shootInterval = 3f;
-    float shootTime;
+    public float shootInterval = 3f;
+    float shootTime = 0;
     Enemy enemyinrange;
 
     public healthbar healthBar;
@@ -17,19 +17,24 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-
     }
 
-    private void OnUpdate()
+    private void Update()
     {
-        shootTime += Time.deltaTime;
-        if (enemyinrange != null && shootTime > shootInterval)
+        if (enemyinrange != null)
         {
-            shootTime = 0f;
-            TakeDamage(enemyinrange.Damage);
+            if (shootTime == 0)
+            {
+                TakeDamage(enemyinrange.Damage);
+                shootTime = shootInterval;
+            }
 
+            shootTime -= Time.deltaTime;
         }
-
+        else
+        {
+            shootTime = 0;
+        }
     }
 
     public void TakeDamage(int damage)
@@ -44,7 +49,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    private void OnCollisonEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("enemy"))
         {
@@ -53,7 +58,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 enemyinrange = enemy;
             }
-           
+
         }
         if (collision.gameObject.CompareTag("void"))
         {
@@ -62,7 +67,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    private void OnCollisonExit2D(Collider2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("enemy"))
         {
@@ -74,6 +79,4 @@ public class PlayerHealth : MonoBehaviour
 
         }
     }
-}   
-
-      
+}

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Enemy : MonoBehaviour
 {
     public int maxHealth = 100;
-    int currentHealth;
+    public int currentHealth;
     public bool IsEndBoss = false;
     public int Damage = 20;
     public string NextLevel = "";
